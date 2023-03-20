@@ -1,6 +1,71 @@
 # clean_architecture_example
 Example of an web application and API wrote in Python3, API is using FastAPI while web app is using Flask. The objective is to explore Clean Architecture concepts.
 
+
+# Folder Structure
+The project uses a folder structure that is based on the clean architecture principles. The structure is as follows:
+
+app/
+|-- domain/
+|   |-- user.py
+|-- repositories/
+|   |-- user_repository.py
+|-- services/
+|   |-- email.py
+|-- use_cases/
+|   |-- command/
+|       |-- register_user.py
+|   |-- query
+|       |-- get_user.py
+|-- adapters/
+|   |-- command_handlers.py
+|   |-- api/
+|       |-- controller.py
+|   |-- web/
+|       |-- templates/
+|           |-- base.html
+|           |-- index.html
+|       |-- views.py
+|-- settings.py
+|-- requirements.txt
+
+The **app/** directory is the top-level directory for the project. It contains the main application code, configuration files, and other resources.
+
+The **domain/** directory contains the domain entities and value objects for the application. These are the core concepts and data structures that define the business logic of the application.
+
+The **repositories/** directory contains the interfaces and implementations for the application's data access layer. These are responsible for persisting and retrieving domain entities and value objects.
+
+The **services/** directory contains the interfaces and implementations for any external services that the application depends on, such as email services or payment gateways.
+
+The **use_cases/** directory contains the use cases for the application. These are the high-level business rules and workflows that orchestrate interactions between the domain entities, repositories, and services. We also included subdirectories to include the CQRS (command query responsibility segregation) pattern.
+
+The **adapters/** directory contains the adapters for the application. These are the lower-level components that handle external input and output, such as command-line interfaces or web APIs. In our case, we've included a web/ subdirectory to hold the web-specific adapters, such as Flask views and templates. We have also included a api/ subdirectory to hold the entry point for the application API.
+
+The **settings.py** file contains any global configuration or settings that are used throughout the application. In our case, we could have included some database and email settings.
+
+The **requirements.txt** file lists all the external dependencies that the application needs to run. This file can be used with the pip package manager to install the necessary dependencies.
+
+
+# Clean Architecture
+The folder structure of the project is based on the **clean architecture principles** and **CQRS (command query responsibility segregation)**, which are designed to promote **modularity, testability, and maintainability** in software applications. The main idea behind clean architecture is to separate the application logic into different layers or components, each with its own well-defined responsibilities and interfaces.
+
+The clean architecture principles can be seen in our project structure in a few different ways:
+
+The separation of the domain entities, repositories, services, use cases, and adapters into separate directories promotes modularity and separation of concerns.
+
+The use of interfaces for the repositories, services, and adapters allows for easy swapping and mocking of these components during testing and development.
+
+The high-level use cases define the business logic of the application in a way that is independent of any particular implementation details, such as the choice of database or web framework.
+
+The web-specific adapters, such as Flask views and templates, are kept separate from the rest of the application logic, making it easy to replace or modify the web interface without affecting the underlying business logic.
+
+By using the clean architecture principles, we can create applications that are easy to understand, maintain, and extend over time. The separation of concerns between different layers of the application makes it easy to test and modify individual components without affecting the rest of the application, and the use of interfaces allows for easy swapping and mocking of components during development and testing.
+
+In our example project, we've used the clean architecture principles to create a simple user registration and activation workflow. We've separated the domain entities, repositories, services, and use cases into separate components, and used interfaces to define the interactions between these components. We've also included a web-specific adapter using Flask to handle incoming requests and serve dynamic HTML pages.
+
+Overall, our project demonstrates how the clean architecture principles can be applied in a Python application to create a flexible, testable, and maintainable codebase.
+
+
 # Start the app localy
 ```
 make start
