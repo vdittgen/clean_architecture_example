@@ -13,9 +13,9 @@ make start.docker
 
 # Make a request to the container
 ```
-curl -X POST http://localhost:8000/users -H 'Content-Type: application/json' -d '{"username":"vinicius","email":"vinipd@gmail.com","password":"123","role":"DE"}'
+curl -X POST http://localhost:8000/users -H 'Content-Type: application/json' -d '{"username":"vinicius","email":"john@gmail.com","password":"123","role":"DE"}'
 ```
 
 ```
-curl -X POST http://localhost:8000/users/get -H 'Content-Type: application/json' -d '{"email":"vinipd@gmail.com"}'
+curl -X POST http://localhost:8000/users/get -H 'Content-Type: application/json' -d '{"email":"john@gmail.com"}'
 ```
