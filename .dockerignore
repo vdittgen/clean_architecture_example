@@ -1,0 +1,18 @@
+# Local development settings
+.dockerignore
+.git
+.gitignore
+
+# Python compiled files
+__pycache__/
+*.pyc
+
+# Logs and other runtime data
+*.log
+*.sqlite3
+*.db
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+
