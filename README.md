@@ -1,5 +1,6 @@
-# clean_architecture_example
-Example of an web application and API wrote in Python3, API is using FastAPI while web app is using Flask. The objective is to explore Clean Architecture concepts.
+# Clean Architecture and CQRS (command query responsibility segregation) with Python3, FastAPI and Flask.
+This project is a simple example of how to use the clean architecture principles in a Python application.
+API is using FastAPI while web app is using Flask.
 
 
 # Folder Structure
