@@ -5,6 +5,7 @@ Example of an web application and API wrote in Python3, API is using FastAPI whi
 # Folder Structure
 The project uses a folder structure that is based on the clean architecture principles. The structure is as follows:
 
+```
 app/
 |-- domain/
 |   |-- user.py
@@ -28,6 +29,7 @@ app/
 |       |-- views.py
 |-- settings.py
 |-- requirements.txt
+```
 
 The **app/** directory is the top-level directory for the project. It contains the main application code, configuration files, and other resources.
 
