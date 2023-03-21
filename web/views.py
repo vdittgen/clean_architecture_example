@@ -1,5 +1,5 @@
 from werkzeug.exceptions import Conflict
-from flask import Blueprint, render_template, request
+from flask import Blueprint, redirect, render_template, request, url_for
 
 from app.adapters.command_handlers import GetUsersHandler, \
     RegisterUserHandler, DeleteUserHandler
@@ -28,9 +28,9 @@ def index():
 
         try:
             register_user_handler(name, email, password, role)
-            users = get_users_handler.execute()
         except UserAlreadyExistsError:
             raise Conflict("A user with the same email already exists")
+    users = get_users_handler.execute()
 
     return render_template('index.html', users=users)
 
@@ -39,8 +39,7 @@ def index():
 def delete_user(email):
     try:
         delete_user_handler(email)
-        users = get_users_handler.execute()
     except Exception as e:
         raise e
 
-    return render_template('index.html', users=users)
+    return redirect(url_for('users.index'))
