@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
 from typing import List, Optional
-# from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session
 
-from app.domain.user import IUser  # , User
+from app.domain.user import IUser, User
+from app.services.db.models import UserModel
 
 
 class IUserRepository(ABC):
@@ -57,7 +58,6 @@ class InMemoryUserRepository(IUserRepository):
         return self._users.values()
 
 
-"""
 class UserSqlAlchemyRepository(IUserRepository):
     def __init__(self, session: Session):
         self.session = session
@@ -108,4 +108,3 @@ class UserSqlAlchemyRepository(IUserRepository):
             is_active=user_model.is_active,
             role=user_model.role,
         )
- """
