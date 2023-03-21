@@ -1,5 +1,5 @@
 from flask import Flask
-from views import users_blueprint
+from web.views import users_blueprint
 
 
 def create_app():
