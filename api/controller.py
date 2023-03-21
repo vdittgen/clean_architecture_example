@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 from app.repositories.user_repository import IUserRepository, \
-    InMemoryUserRepository, UserSqlAlchemyRepository
+    InMemoryUserRepository
 from app.adapters.command_handlers import RegisterUserHandler, GetUserHandler
 from app.services.email import IEmailService, MockEmailService
 from app.use_cases.command.register_user import UserAlreadyExistsError
