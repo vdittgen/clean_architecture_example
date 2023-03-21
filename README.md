@@ -80,12 +80,12 @@ make start.api
 make start.web
 ```
 
-# Start the both API and Web app on a container
+# Start both API and Web app on a container
 ```
 make start.docker
 ```
 
-# Make a request to the container
+# Make a request to the API
 ```
 curl -X POST http://localhost:8000/users -H 'Content-Type: application/json' -d '{"username":"vinicius","email":"john@gmail.com","password":"123","role":"DE"}'
 ```
