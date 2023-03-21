@@ -7,6 +7,20 @@ API is using FastAPI while web app is using Flask.
 The project uses a folder structure that is based on the clean architecture principles. The structure is as follows:
 
 ```
+api/
+|-- controller.py
+|-- Dockerfile
+|-- settings.py
+|-- requirements.txt
+web/
+|-- controller.py
+|-- Dockerfile
+|-- templates/
+|   |-- base.html
+|   |-- index.html
+|-- views.py
+|-- settings.py
+|-- requirements.txt
 app/
 |-- domain/
 |   |-- user.py
@@ -21,18 +35,9 @@ app/
 |       |-- get_user.py
 |-- adapters/
 |   |-- command_handlers.py
-|   |-- api/
-|       |-- controller.py
-|   |-- web/
-|       |-- templates/
-|           |-- base.html
-|           |-- index.html
-|       |-- views.py
-|-- settings.py
-|-- requirements.txt
 ```
 
-The **app/** directory is the top-level directory for the project. It contains the main application code, configuration files, and other resources.
+The **app/** directory is the top-level directory for the application. It contains the main application code, configuration files, and other resources.
 
 The **domain/** directory contains the domain entities and value objects for the application. These are the core concepts and data structures that define the business logic of the application.
 
@@ -42,11 +47,7 @@ The **services/** directory contains the interfaces and implementations for any 
 
 The **use_cases/** directory contains the use cases for the application. These are the high-level business rules and workflows that orchestrate interactions between the domain entities, repositories, and services. We also included subdirectories to include the CQRS (command query responsibility segregation) pattern.
 
-The **adapters/** directory contains the adapters for the application. These are the lower-level components that handle external input and output, such as command-line interfaces or web APIs. In our case, we've included a web/ subdirectory to hold the web-specific adapters, such as Flask views and templates. We have also included a api/ subdirectory to hold the entry point for the application API.
-
-The **settings.py** file contains any global configuration or settings that are used throughout the application. In our case, we could have included some database and email settings.
-
-The **requirements.txt** file lists all the external dependencies that the application needs to run. This file can be used with the pip package manager to install the necessary dependencies.
+The **adapters/** directory contains the adapters for the application. These are the lower-level components that handle external input and output, such as command-line interfaces or web APIs.
 
 
 # Clean Architecture
