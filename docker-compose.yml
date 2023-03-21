@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  flask_app:
+    build: ./web
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./app:/app/
+
+  fastapi_app:
+    build: ./api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/

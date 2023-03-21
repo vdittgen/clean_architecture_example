@@ -1,4 +1,3 @@
 uvicorn[standard]
-flask
 fastapi
 sqlalchemy

@@ -1,9 +1,14 @@
-start:
-	uvicorn app.adapters.api.controller:app --reload
+start.api:
+	uvicorn app.adapters.api.controller:api_app --reload
+
+start.web:
+	gunicorn "app.adapters.web.controller:web_app"
 
 start.docker:
-	chmod 700 bash/docker.sh
-	./bash/docker.sh
+	docker-compose up
+
+start.docker.build:
+	docker-compose up --build
 
 stop.docker:
-	docker stop $(docker ps -q)
+	docker-compose down

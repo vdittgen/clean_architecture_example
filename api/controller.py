@@ -9,7 +9,7 @@ from app.services.email import IEmailService, MockEmailService
 from app.use_cases.command.register_user import UserAlreadyExistsError
 
 
-app = FastAPI()
+api_app = FastAPI()
 user_repo: IUserRepository = InMemoryUserRepository()
 email_service: IEmailService = MockEmailService()
 register_user_handler = RegisterUserHandler(user_repo, email_service)
@@ -35,7 +35,7 @@ class UserOut(BaseModel):
     role: Optional[str] = None
 
 
-@app.post("/users", response_model=UserOut)
+@api_app.post("/users", response_model=UserOut)
 async def register_user(user_in: UserIn):
     try:
         user = register_user_handler(user_in.username, user_in.email,
@@ -51,7 +51,7 @@ async def register_user(user_in: UserIn):
     )
 
 
-@app.post("/users/get")
+@api_app.post("/users/get")
 async def get_user(email_in: EmailIn):
     if email_in.email is None:
         raise HTTPException(status_code=400, detail="Missing email")
