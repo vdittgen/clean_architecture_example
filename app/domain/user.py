@@ -7,18 +7,12 @@ class IUser(ABC):
     @abstractmethod
     def __init__(
         self,
-        id: Optional[int],
         username: str,
         email: str,
         password: str,
         is_active: bool,
         role: Optional[str],
     ) -> None:
-        pass
-
-    @property
-    @abstractmethod
-    def id(self) -> Optional[int]:
         pass
 
     @property
@@ -51,10 +45,6 @@ class IUser(ABC):
         pass
 
     @abstractmethod
-    def set_id(self, id: int) -> None:
-        pass
-
-    @abstractmethod
     def deactivate(self) -> None:
         pass
 
@@ -66,23 +56,17 @@ class IUser(ABC):
 class User(IUser):
     def __init__(
         self,
-        id: Optional[int],
         username: str,
         email: str,
         password: str,
         is_active: bool,
         role: Optional[str],
     ) -> None:
-        self._id = id
         self._username = username
         self._email = email
         self._password = password
         self._is_active = is_active
         self._role = role
-
-    @property
-    def id(self) -> Optional[int]:
-        return self._id
 
     @property
     def username(self) -> str:
@@ -109,9 +93,6 @@ class User(IUser):
 
     def deactivate(self) -> None:
         self._is_active = False
-
-    def set_id(self, id: int) -> None:
-        self._id = id
 
     def change_password(self, new_password: str) -> None:
         self._password = new_password

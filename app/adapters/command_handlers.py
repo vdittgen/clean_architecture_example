@@ -1,7 +1,10 @@
+from typing import List
 from app.repositories.user_repository import IUserRepository, IUser
 from app.services.email import IEmailService
+from app.use_cases.command.delete_user import DeleteUser
 from app.use_cases.command.register_user import RegisterUser
 from app.use_cases.query.get_user import GetUser
+from app.use_cases.query.get_users import GetUsers
 
 
 class RegisterUserHandler:
@@ -20,7 +23,21 @@ class GetUserHandler:
     def __init__(self, user_repo: IUserRepository):
         self._get_user = GetUser(user_repo)
 
-    def __call__(
-        self, email: str
-    ) -> IUser:
+    def __call__(self, email: str) -> IUser:
         return self._get_user.execute(email)
+
+
+class GetUsersHandler:
+    def __init__(self, user_repo: IUserRepository):
+        self._get_users = GetUsers(user_repo)
+
+    def execute(self) -> List[IUser]:
+        return self._get_users.execute()
+
+
+class DeleteUserHandler:
+    def __init__(self, user_repo: IUserRepository):
+        self._delete_user = DeleteUser(user_repo)
+
+    def __call__(self, email: str) -> IUser:
+        return self._delete_user.execute(email)

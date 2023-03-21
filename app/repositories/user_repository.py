@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import List, Optional
 # from sqlalchemy.orm import Session
 
 from app.domain.user import IUser  # , User
@@ -11,10 +11,6 @@ class IUserRepository(ABC):
         pass
 
     @abstractmethod
-    def update(self, user: IUser) -> None:
-        pass
-
-    @abstractmethod
     def delete(self, user_id: int) -> None:
         pass
 
@@ -24,6 +20,10 @@ class IUserRepository(ABC):
 
     @abstractmethod
     def get_by_email(self, email: str) -> Optional[IUser]:
+        pass
+
+    @abstractmethod
+    def get_users(self) -> Optional[List[IUser]]:
         pass
 
 
@@ -33,20 +33,16 @@ class InMemoryUserRepository(IUserRepository):
         self._last_id = 0
 
     def save(self, user: IUser) -> None:
-        if user.id is None:
-            self._last_id += 1
-            user.set_id(self._last_id)
-        self._users[user.id] = user
+        self._last_id += 1
+        self._users[self._last_id] = user
 
-    def update(self, user: IUser) -> None:
-        if user.id not in self._users:
-            raise ValueError(f"User with ID {user.id} does not exist")
-        self._users[user.id] = user
-
-    def delete(self, user_id: int) -> None:
-        if user_id not in self._users:
-            raise ValueError(f"User with ID {user_id} does not exist")
-        del self._users[user_id]
+    def delete(self, email: str) -> None:
+        users_copy = self._users.copy()
+        for key, user in users_copy.items():
+            if user.email == email:
+                del self._users[key]
+                return
+        raise ValueError(f"User with email {email} does not exist")
 
     def get_by_id(self, user_id: int) -> Optional[IUser]:
         return self._users.get(user_id)
@@ -56,6 +52,9 @@ class InMemoryUserRepository(IUserRepository):
             if user.email == email:
                 return user
         return None
+
+    def get_users(self) -> Optional[List[IUser]]:
+        return self._users.values()
 
 
 """

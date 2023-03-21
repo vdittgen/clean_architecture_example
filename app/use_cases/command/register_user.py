@@ -1,5 +1,4 @@
 from __future__ import annotations
-from uuid import uuid4
 from abc import ABC, abstractmethod
 from typing import Optional
 
@@ -43,9 +42,7 @@ class RegisterUser(IRegisterUser):
             raise UserAlreadyExistsError(
                 f"User with email {email} already exists")
 
-        user_id = uuid4()
         user = User(
-            id=user_id,
             username=username,
             email=email,
             password=password,
@@ -54,7 +51,7 @@ class RegisterUser(IRegisterUser):
         )
         self._user_repo.save(user)
 
-        activation_link = f"https://example.com/activate/{user_id}"
+        activation_link = f"https://example.com/activate/{user.email}"
         activation_message = f"Hello, {username}! Please activate your \
             account by clicking the following link: {activation_link}"
         self._email_service.send_activation_email(email, activation_message)

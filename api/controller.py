@@ -28,7 +28,6 @@ class EmailIn(BaseModel):
 
 
 class UserOut(BaseModel):
-    id: int
     username: str
     email: str
     is_active: bool
@@ -43,7 +42,6 @@ async def register_user(user_in: UserIn):
     except UserAlreadyExistsError as e:
         raise HTTPException(status_code=409, detail=str(e))
     return UserOut(
-        id=user.id,
         username=user.username,
         email=user.email,
         is_active=user.is_active,
@@ -61,7 +59,6 @@ async def get_user(email_in: EmailIn):
         raise HTTPException(status_code=404, detail="User not found")
 
     return UserOut(
-        id=user.id,
         username=user.username,
         email=user.email,
         is_active=user.is_active,
