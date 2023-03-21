@@ -70,12 +70,17 @@ In our example project, we've used the clean architecture principles to create a
 Overall, our project demonstrates how the clean architecture principles can be applied in a Python application to create a flexible, testable, and maintainable codebase.
 
 
-# Start the app localy
+# Start the API localy
 ```
-make start
+make start.api
 ```
 
-# Start the app on a container
+# Start the Web application localy
+```
+make start.web
+```
+
+# Start the both API and Web app on a container
 ```
 make start.docker
 ```
