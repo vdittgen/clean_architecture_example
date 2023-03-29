@@ -6,6 +6,8 @@ ENV ENVIRONMENT=$ENVIRONMENT
 COPY . ${APP_ROOT}
 
 RUN  pip3 install -r ${APP_ROOT}/requirements.txt
+RUN apt-get update && apt-get install -y sqlite3
+RUN sqlite3 example.db
 
 EXPOSE 8000
 

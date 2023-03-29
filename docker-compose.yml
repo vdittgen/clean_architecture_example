@@ -7,6 +7,7 @@ services:
       - "8080:8080"
     volumes:
       - ./app:/app/
+      - ./web:/web/
 
   fastapi_app:
     build: ./api
