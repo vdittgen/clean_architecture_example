@@ -4,12 +4,13 @@ from flask import Blueprint, redirect, render_template, request, url_for
 from app.adapters.command_handlers import GetUsersHandler, \
     RegisterUserHandler, DeleteUserHandler
 from app.repositories.user_repository import IUserRepository, \
-    InMemoryUserRepository
+    UserSqlAlchemyRepository
 from app.services.email import IEmailService, MockEmailService
 from app.use_cases.command.register_user import UserAlreadyExistsError
+from app.services.db.database import session
 
 users_blueprint = Blueprint('users', __name__)
-user_repo: IUserRepository = InMemoryUserRepository()
+user_repo: IUserRepository = UserSqlAlchemyRepository(session)
 email_service: IEmailService = MockEmailService()
 register_user_handler = RegisterUserHandler(user_repo, email_service)
 get_users_handler = GetUsersHandler(user_repo)

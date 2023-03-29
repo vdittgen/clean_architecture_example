@@ -3,15 +3,16 @@ from pydantic import BaseModel
 from typing import Optional
 
 from app.repositories.user_repository import IUserRepository, \
-    InMemoryUserRepository
+    UserSqlAlchemyRepository
 from app.adapters.command_handlers import RegisterUserHandler, GetUserHandler
 from app.services.email import IEmailService, MockEmailService
 from app.use_cases.command.register_user import UserAlreadyExistsError
+from app.services.db.database import session
 
 
 api_app = FastAPI()
 
-user_repo: IUserRepository = InMemoryUserRepository()
+user_repo: IUserRepository = UserSqlAlchemyRepository(session)
 email_service: IEmailService = MockEmailService()
 register_user_handler = RegisterUserHandler(user_repo, email_service)
 get_user_handler = GetUserHandler(user_repo)
