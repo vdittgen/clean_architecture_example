@@ -68,13 +68,8 @@ class UserSqlAlchemyRepository(IUserRepository):
         self.session.commit()
         user.id = user_model.id
 
-    def update(self, user: IUser) -> None:
-        user_model = self._to_model(user)
-        self.session.merge(user_model)
-        self.session.commit()
-
-    def delete(self, user_id: int) -> None:
-        self.session.query(UserModel).filter_by(id=user_id).delete()
+    def delete(self, email: str) -> None:
+        self.session.query(UserModel).filter_by(email=email).delete()
         self.session.commit()
 
     def get_by_id(self, user_id: int) -> Optional[IUser]:
@@ -87,9 +82,13 @@ class UserSqlAlchemyRepository(IUserRepository):
             .filter_by(email=email).first()
         return self._to_domain(user_model)
 
+    def get_users(self) -> Optional[List[IUser]]:
+        users = self.session.query(UserModel).all()
+        domain_users = [self._to_domain(user) for user in users]
+        return domain_users
+
     def _to_model(self, user: IUser) -> UserModel:
         return UserModel(
-            id=user.id,
             username=user.username,
             email=user.email,
             password=user.password,
@@ -101,7 +100,6 @@ class UserSqlAlchemyRepository(IUserRepository):
         if user_model is None:
             return None
         return User(
-            id=user_model.id,
             username=user_model.username,
             email=user_model.email,
             password=user_model.password,

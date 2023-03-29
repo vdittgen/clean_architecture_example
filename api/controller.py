@@ -10,8 +10,8 @@ from app.use_cases.command.register_user import UserAlreadyExistsError
 
 
 api_app = FastAPI()
+
 user_repo: IUserRepository = InMemoryUserRepository()
-# user_repo: IUserRepository = UserSqlAlchemyRepository()
 email_service: IEmailService = MockEmailService()
 register_user_handler = RegisterUserHandler(user_repo, email_service)
 get_user_handler = GetUserHandler(user_repo)
